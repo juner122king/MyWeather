@@ -3,12 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
+    android:background="#6A4C9C"
     tools:context=".home.HomeActivity">
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="this is fragment" />
+        android:text="38 C"
+        android:textSize="55sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/info"
+        android:layout_below="@id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/temperature"
+        android:textSize="15sp"
+        android:text="多云"
+        />
+
+    <TextView
+        android:id="@+id/moon"
+        android:layout_width="15sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="十月初五"
+        android:textSize="15sp" />
+
+
 </RelativeLayout>

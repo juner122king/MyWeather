@@ -2,6 +2,7 @@ package com.andmobi.myweather.home;
 
 import com.andmobi.myweather.BasePresenter;
 import com.andmobi.myweather.BaseView;
+import com.andmobi.myweather.modle.Data;
 import com.andmobi.myweather.modle.Weather;
 import com.andmobi.myweather.modle.WeatherOverview;
 
@@ -25,7 +26,7 @@ public interface HomeContract {
     interface View extends BaseView<Presenter> {
         void changeText(String text);
 
-        void onQuery(WeatherOverview weatherOverview);
+        void onToDay(Data.Realtime realtime);
     }
 
     interface View2 extends BaseView<Presenter> {

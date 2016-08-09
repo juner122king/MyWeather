@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.andmobi.myweather.R;
-import com.andmobi.myweather.modle.WeatherOverview;
+import com.andmobi.myweather.modle.Data;
 import com.andmobi.myweather.util.DebugUtils;
 import com.andmobi.myweather.util.Utils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -22,7 +25,13 @@ import com.andmobi.myweather.util.Utils;
 public class HomeFragment extends Fragment implements HomeContract.View {
 
     HomeContract.Presenter mPresenter;
-    TextView mTv_text;
+    //    @BindView(R.id.temperature)
+    TextView tv_temperature;
+    //    @BindView(R.id.info)
+    TextView tv_info;
+    //    @BindView(R.id.moon)
+    TextView tv_moon;
+
     @Override
     public void setPresenter(@NonNull HomeContract.Presenter presenter) {
         mPresenter = Utils.checkNotNull(presenter);
@@ -33,14 +42,10 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DebugUtils.d(getClass().getSimpleName(), "onCreateView");
         View root = inflater.inflate(R.layout.fragment1_home, container, false);
-        mTv_text = (TextView) root.findViewById(R.id.tv1);
-        mTv_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.onChangeText();
-
-            }
-        });
+//        ButterKnife.bind(this,root);
+        tv_temperature = (TextView) root.findViewById(R.id.temperature);
+        tv_info = (TextView) root.findViewById(R.id.info);
+        tv_moon = (TextView) root.findViewById(R.id.moon);
         return root;
     }
 
@@ -48,19 +53,23 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onResume() {
         super.onResume();
         DebugUtils.d(getClass().getSimpleName(), "onResume");
-        mPresenter.query();
+        mPresenter.toDay();
     }
 
     @Override
     public void changeText(String text) {
-        mTv_text.setText(text);
+
     }
 
     @Override
-    public void onQuery(WeatherOverview weatherOverview) {
-        DebugUtils.d(getClass().getSimpleName(), weatherOverview.toString());
-
-        mTv_text.setText(weatherOverview.getData().getLife().getDate());
+    public void onToDay(Data.Realtime realtime) {
+        DebugUtils.d(getClass().getSimpleName(), realtime.toString());
+        String moon = realtime.getMoon();//农历
+        String temperature = realtime.getWeather().getTemperature();//温度
+        String info = realtime.getWeather().getInfo();//天气情况
+        tv_temperature.setText(String.format("%s\u2103", temperature));
+        tv_info.setText(info);
+        tv_moon.setText(moon);
 
     }
 }

@@ -69,7 +69,7 @@ public class HomePresenter implements HomeContract.Presenter {
         queryAll().subscribe(new Action1<WeatherOverview>() {
             @Override
             public void call(WeatherOverview weatherOverview) {
-                mHomeView.onQuery(weatherOverview);
+                mHomeView.onToDay(weatherOverview.getData().getRealtime());
             }
         });
 

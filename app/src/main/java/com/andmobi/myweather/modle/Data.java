@@ -166,7 +166,7 @@ public class Data {
                     '}';
         }
 
-        class Weather {
+        public class Weather {
 
             private String humidity;
 
